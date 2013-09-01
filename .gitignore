@@ -1,3 +1,9 @@
+# makepkg's stuffs
+*tar.gz
+*tar.xz
+pkg
+src
+
 # Object files
 *.o
 
