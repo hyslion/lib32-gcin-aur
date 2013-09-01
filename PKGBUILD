@@ -27,6 +27,10 @@ build() {
   mkdir -p QtCore
   cp qconfig.h QtCore/
 
+  # adjust compiler's parameters for 32bit Qt im-module
+  export CC="gcc -m32 -I${srcdir} -I${srcdir}/QtCore"
+  export CXX="g++ -m32 -I${srcdir} -I${srcdir}/QtCore"
+
   cd "${srcdir}/${_pkgname}-${pkgver}"
 
   patch -p1 < ${srcdir}/lib32-gcin.patch
@@ -43,10 +47,6 @@ build() {
 
   # due to dependency, gtk-im will be built together
   make -C im-client
-
-  # adjust compiler's parameters for 32bit Qt im-module
-  export CC="gcc -m32 -I${srcdir} -I${srcdir}/QtCore"
-  export CXX="g++ -m32 -I${srcdir} -I${srcdir}/QtCore"
 
   # build Qt4 im-module
   make -C qt4-im
